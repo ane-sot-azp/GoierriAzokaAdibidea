@@ -25,3 +25,23 @@
             iruzkinaBidali();
         })
     });
+
+    function iruzkinaBidali() {
+        var iruzkina = $('#iruzkina').val();
+        $.ajax({
+            url: 'iruzkinakJaso.php',
+            type: 'POST',
+            data: {
+                iruzkina: iruzkina
+            }
+        })
+                .done(function (data) {
+                    $('#iruzkina').val('');
+                    location.reload();
+                })
+                .fail(function () {
+                    console.log("Errorea");
+                })
+    };
+ 
+    </script>
