@@ -14,17 +14,17 @@ require_once(APP_DIR . '/src/php/connect.php');
 if (count($_POST) > 0) {
     switch ($_POST["action"]) {
         case "checkInput": {
-                echo checkInput($_POST);
-                break;
-            }
+            echo checkInput($_POST);
+            break;
+        }
         case "saveAnswer": {
-                echo saveAnswer($_POST);
-                break;
-            }
+            echo saveAnswer($_POST);
+            break;
+        }
         case "changeConfig": {
-                echo changeConfig($_POST);
-                break;
-            }
+            echo changeConfig($_POST);
+            break;
+        }
     }
 }
 die;
@@ -114,9 +114,12 @@ function saveAnswer($inputValue)
 
         if (saveAnswerInDb($courseId, $userId, $valoration, $answerIsCorrect, $valid, $teacher)) {
             writeLog("Zuzen gorde da", [
-                "courseId" => $courseId, "userId" => $userId,
-                "valoration" => $valoration, "answerIsCorrect" => $answerIsCorrect,
-                "valid" => $valid, "teacher" => $teacher
+                "courseId" => $courseId,
+                "userId" => $userId,
+                "valoration" => $valoration,
+                "answerIsCorrect" => $answerIsCorrect,
+                "valid" => $valid,
+                "teacher" => $teacher
             ]);
             return json_encode(["code" => "200", "message" => ""]);
         } else {
@@ -195,23 +198,23 @@ function changeConfig($inputValue)
     if (isset($_POST['mainColor']) && isset($_POST['footerColor'])) {
         $mainColor = $_POST['mainColor'];
         $footerColor = $_POST['footerColor'];
- 
+
         $config = simplexml_load_file(APP_DIR . '/conf.xml');
- 
+
         $config->mainColor = $mainColor;
         $config->footerColor = $footerColor;
- 
+
         $config->asXML(APP_DIR . '/conf.xml');
- 
- 
+
+
         // //XML konfigurazioa
         // $config = simplexml_load_file(APP_DIR . '/conf.xml');
- 
+
         // //TODO: GARATZEKO
- 
+
         //Orri nagusira redirekzioa egiteko
         $location = HREF_APP_DIR . "/src/views/main/index.php";
- 
+
         header('Location: ' . $location);
     }
 }

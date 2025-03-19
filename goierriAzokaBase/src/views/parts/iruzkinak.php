@@ -25,8 +25,7 @@
             iruzkinaBidali();
         })
     });
-
-    function iruzkinaBidali() {
+function iruzkinaBidali() {
         var iruzkina = $('#iruzkina').val();
         $.ajax({
             url: 'iruzkinakJaso.php',
@@ -43,5 +42,6 @@
                     console.log("Errorea");
                 })
     };
- 
+
     </script>
+
