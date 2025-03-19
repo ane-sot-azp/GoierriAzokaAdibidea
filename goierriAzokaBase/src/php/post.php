@@ -192,13 +192,26 @@ function checkIfAlreadyHasAnswered($courseId, $email)
 
 function changeConfig($inputValue)
 {
-    //XML konfigurazioa
-    $config = simplexml_load_file(APP_DIR . '/conf.xml');
-
-    //TODO: GARATZEKO
-
-    //Orri nagusira redirekzioa egiteko
-    $location = HREF_APP_DIR . "/src/views/main/index.php";
-    
-    header('Location: '. $location);
+    if (isset($_POST['mainColor']) && isset($_POST['footerColor'])) {
+        $mainColor = $_POST['mainColor'];
+        $footerColor = $_POST['footerColor'];
+ 
+        $config = simplexml_load_file(APP_DIR . '/conf.xml');
+ 
+        $config->mainColor = $mainColor;
+        $config->footerColor = $footerColor;
+ 
+        $config->asXML(APP_DIR . '/conf.xml');
+ 
+ 
+        // //XML konfigurazioa
+        // $config = simplexml_load_file(APP_DIR . '/conf.xml');
+ 
+        // //TODO: GARATZEKO
+ 
+        //Orri nagusira redirekzioa egiteko
+        $location = HREF_APP_DIR . "/src/views/main/index.php";
+ 
+        header('Location: ' . $location);
+    }
 }
